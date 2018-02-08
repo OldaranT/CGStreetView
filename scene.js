@@ -1,11 +1,50 @@
+var loader = new THREE.ObjectLoader();
+var objLoader = new THREE.OBJLoader();
+var house = new THREE.Mesh();
+
 // Create scene
 var scene = new THREE.Scene();
 
+objLoader.load(
+    //path to the obj.
+    "js/obj/model.obj",
+    function (object) {
+        //define what material each component is.
+        var mat = new THREE.MeshNormalMaterial();
+        object.traverse( function ( child ) {
+
+            if ( child instanceof THREE.Mesh ) {
+
+                child.material = mat;
+            }
+
+        } );
+        //turn it into a global variable so we can change the object later on in the code.
+        house = object;
+        //add the object to the scene.
+        scene.add(house);
+        console.log(object);
+    },
+    // called when loading is in progresses
+    function ( xhr ) {
+
+        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+    },
+    // called when loading has errors
+    function ( error ) {
+
+        console.log( error );
+
+    }
+);
+
+
 // Create camera
 var camera = new THREE.PerspectiveCamera(
-	75, // fov — Camera frustum vertical field of view.
+	100, // fov — Camera frustum vertical field of view.
 	window.innerWidth/window.innerHeight, // aspect — Camera frustum aspect ratio.
-	0.1, // near — Camera frustum near plane.
+	0.01, // near — Camera frustum near plane.
 	7000); // far — Camera frustum far plane.
 
 // Create renderer
@@ -41,12 +80,16 @@ var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
 var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 scene.add( skyBox );
 
+var light = new THREE.DirectionalLight( 0xdddddd, 10 );
+light.position.set(0, 1, 0 );
+scene.add( light );
+
 
 
 // Move camera from center
-camera.position.x = 0; // move right from center of scene
-camera.position.y = 0; // move up from center of scene
-camera.position.z = 0; // move camera away from center of scene
+camera.position.x = 2; // move right from center of scene
+camera.position.y = 1; // move up from center of scene
+camera.position.z = 3; // move camera away from center of scene
 
 renderer.render(scene, camera);
 
@@ -58,7 +101,7 @@ var render = function () {
 
     //cube.rotation.y += 1 * delta;
     //cube.rotation.x +=  1 * delta;
-    cube.rotation.z += 1* delta;
+    // cube.rotation.z += 1* delta;
     renderer.render(scene, camera);
 };
 
@@ -66,9 +109,3 @@ var render = function () {
 
 
 render();
-
-scene.add(THREE.OrbitControls(,scene))
-
-var light = new THREE.DirectionalLight(0xdddddd, 1000);
-light.position.set(-1, 10, 1);
-scene.add(light);
