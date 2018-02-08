@@ -6,7 +6,7 @@ var camera = new THREE.PerspectiveCamera(
 	75, // fov — Camera frustum vertical field of view.
 	window.innerWidth/window.innerHeight, // aspect — Camera frustum aspect ratio.
 	0.1, // near — Camera frustum near plane.
-	1000); // far — Camera frustum far plane. 
+	7000); // far — Camera frustum far plane.
 
 // Create renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -14,8 +14,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 var geometry = new THREE.SphereGeometry(1, 32, 24);
-var normalMap = THREE.ImageUtils.loadTexture("images/earth_normal.jpg");
-var colorMap = THREE.ImageUtils.loadTexture("images/earth.jpg");
+var normalMap = THREE.ImageUtils.loadTexture("images/textures/earth_normal.jpg");
+var colorMap = THREE.ImageUtils.loadTexture("images/textures/earth.jpg");
 var material = new THREE.MeshPhongMaterial(
     {
         map: colorMap,
@@ -37,6 +37,23 @@ uvs.push( new THREE.Vector2( 0.0, 0.0 ) );
 uvs.push( new THREE.Vector2( 1.0, 0.0 ) );
 uvs.push( new THREE.Vector2( 1.0, 1.0 ) );
 uvs.push( new THREE.Vector2( 0.0, 1.0 ) );
+
+// Skybox
+var directions  = ["images/skybox/posx.jpg", "images/skybox/negx.jpg", "images/skybox/posy.jpg", "images/skybox/negy.jpg", "images/skybox/posz.jpg", "images/skybox/negz.jpg"];
+var materialArray = [];
+for (var i = 0; i < 6; i++)
+{
+    console.log(directions[i]);
+    materialArray.push( new THREE.MeshBasicMaterial({
+        map: THREE.ImageUtils.loadTexture( directions[i]),
+        side: THREE.BackSide})
+    );
+}
+
+var skyGeometry = new THREE.CubeGeometry( 5000, 5000, 5000 );
+var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
+var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
+scene.add( skyBox );
 
 
 // generate faces
@@ -62,6 +79,9 @@ var render = function () {
     cube.rotation.z += 1* delta;
     renderer.render(scene, camera);
 };
+
+
+
 
 render();
 

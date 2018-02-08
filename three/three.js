@@ -44280,7 +44280,7 @@
 
 		extractUrlBase: function ( url ) {
 
-			console.warn( 'THREE.Loader: .extractUrlBase() has been deprecated. Use THREE.LoaderUtils.extractUrlBase() instead.' );
+			console.warn( 'THREE.loader: .extractUrlBase() has been deprecated. Use THREE.LoaderUtils.extractUrlBase() instead.' );
 			return LoaderUtils.extractUrlBase( url );
 
 		}
