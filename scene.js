@@ -23,23 +23,9 @@ var material = new THREE.MeshPhongMaterial(
     }
 );
 var cube = new THREE.Mesh(geometry,material);
-scene.add(cube);
-
-var HouseboxGeometry =  new THREE.BoxGeometry(1,1,1);
-var HouseBox
-var HouseboxGeometry = new THREE.Geometry();
-HouseboxGeometry.vertices.push( new THREE.Vector3( 0.0, 0.0, 0.0 ) );
-HouseboxGeometry.vertices.push( new THREE.Vector3( 1.0, 0.0, 0.0 ) );
-HouseboxGeometry.vertices.push( new THREE.Vector3( 1.0, 1.0, 0.0 ) );
-
-var uvs = [];
-uvs.push( new THREE.Vector2( 0.0, 0.0 ) );
-uvs.push( new THREE.Vector2( 1.0, 0.0 ) );
-uvs.push( new THREE.Vector2( 1.0, 1.0 ) );
-uvs.push( new THREE.Vector2( 0.0, 1.0 ) );
 
 // Skybox
-var directions  = ["images/skybox/posx.jpg", "images/skybox/negx.jpg", "images/skybox/posy.jpg", "images/skybox/negy.jpg", "images/skybox/posz.jpg", "images/skybox/negz.jpg"];
+var directions  = ["images/skybox/xpos.png", "images/skybox/xneg.png", "images/skybox/ypos.png", "images/skybox/yneg.png", "images/skybox/zpos.png", "images/skybox/zneg.png"];
 var materialArray = [];
 for (var i = 0; i < 6; i++)
 {
@@ -56,15 +42,11 @@ var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 scene.add( skyBox );
 
 
-// generate faces
-HouseboxGeometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
-HouseboxGeometry.faceVertexUvs[ 0 ].push( [ uvs[0], uvs[1], uvs[2] ] );
-
 
 // Move camera from center
-camera.position.x = 2; // move right from center of scene
-camera.position.y = 2; // move up from center of scene
-camera.position.z = 6; // move camera away from center of scene
+camera.position.x = 0; // move right from center of scene
+camera.position.y = 0; // move up from center of scene
+camera.position.z = 0; // move camera away from center of scene
 
 renderer.render(scene, camera);
 
@@ -85,7 +67,8 @@ var render = function () {
 
 render();
 
+scene.add(THREE.OrbitControls(,scene))
 
-var light = new THREE.DirectionalLight(0xdddddd, 1);
-light.position.set(-1, 1, 1);
+var light = new THREE.DirectionalLight(0xdddddd, 1000);
+light.position.set(-1, 10, 1);
 scene.add(light);
