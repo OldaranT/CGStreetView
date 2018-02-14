@@ -3,13 +3,162 @@
 <head>
     <title>Three.js Starter</title>
     <style>
-        html, body {
-            margin: 0; padding: 0; overflow: hidden;
+        body
+        {
+            margin: 0;
         }
+        canvas
+        {
+            width: 100%;
+            height: 100%;
+        }
+
     </style>
 </head>
 <body>
     <script src="three/three.js"></script>
-    <script src="scene.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script>
+        // Create scene
+        var scene = new THREE.Scene();
+
+        // Create camera
+        var camera = new THREE.PerspectiveCamera(
+            75, // fov — Camera frustum vertical field of view.
+            window.innerWidth / window.innerHeight, // aspect — Camera frustum aspect ratio.
+            0.1, // near — Camera frustum near plane.
+            11000); // far — Camera frustum far plane.
+
+        //Create light
+        var light = new THREE.DirectionalLight(0xdddddd, 1000);
+        light.position.set(-1, 10, 1);
+        scene.add(light);
+
+        //Create Loader
+        var TextureLoader = new THREE.TextureLoader();
+
+        // Create renderer
+        var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        //Event
+        window.addEventListener('resize', function () {
+           var width = window.innerWidth;
+           var height = window.innerHeight;
+           renderer.setSize(width,height);
+           camera.aspect = width / height;
+           camera.updateProjectionMatrix();
+        });
+
+        //Create controls.
+        control = new THREE.OrbitControls( camera, renderer.domElement);
+
+
+
+        camera.position.z = 3;
+//
+        var loader = new THREE.TextureLoader();
+        loader.setCrossOrigin("");
+        var texture1 = loader.load("https://threejs.org/examples/textures/crate.gif");
+        texture1.wrapS = texture1.wrapT = THREE.RepeatWrapping;
+        texture1.repeat.set(0.05, 0.05);
+        var texture2 = loader.load("https://threejs.org/examples/textures/hardwood2_diffuse.jpg");
+        texture2.wrapS = texture2.wrapT = THREE.RepeatWrapping;
+        texture2.repeat.set(0.1, 0.1);
+
+
+//
+
+        // Loads the "floor" of the environment.
+        TextureLoader.load('images/Floor/Grass.jpg', function ( texture ) {
+            var geo = new THREE.PlaneBufferGeometry(2000, 2000, 8, 8);
+            var mat = new THREE.MeshBasicMaterial({map: texture, side: THREE.DoubleSide});
+            var floor = new THREE.Mesh(geo, mat);
+            // Allows for floor to repeat itself (to prevent blurriness).
+            texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+            // Optimizing quality of texture.
+            texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+            // Texture repeating options, the floor is a 40x40 grid of tiles containing the texture.
+            texture.repeat.set( 400, 400 );
+            // Makes it so that the floor is horizontal(default is vertical).
+            floor.rotateX(-Math.PI / 2);
+            floor.position.y = 0.5;
+            scene.add(floor);
+        });
+
+        // game logic
+        var update = function () {
+
+        };
+
+        //draw scene
+        var render = function () {
+          renderer.render(scene, camera);
+        };
+
+        // run gameloop
+        var Gameloop = function () {
+            requestAnimationFrame(Gameloop);
+            update();
+            render();
+        };
+
+        Gameloop();
+
+
+
+
+
+
+// old
+        // var geometry = new THREE.SphereGeometry(1, 32, 24);
+        // var normalMap = THREE.ImageUtils.loadTexture("images/textures/earth_normal.jpg");
+        // var colorMap = THREE.ImageUtils.loadTexture("images/textures/earth.jpg");
+        // var material = new THREE.MeshPhongMaterial(
+        //     {
+        //         map: colorMap,
+        //         normalMap: normalMap
+        //     }
+        // );
+        // var cube = new THREE.Mesh(geometry,material);
+        //
+        // Skybox
+
+        //
+        //
+        //
+        // // Move camera from center
+        // camera.position.x = 0; // move right from center of scene
+        // camera.position.y = 0; // move up from center of scene
+        // camera.position.z = 0; // move camera away from center of scene
+        //
+        // renderer.render(scene, camera);
+        //
+        // var clock = new THREE.Clock();
+        //
+        // var render = function () {
+        //     requestAnimationFrame(render);
+        //     var delta = clock.getDelta();
+        //
+        //     //cube.rotation.y += 1 * delta;
+        //     //cube.rotation.x +=  1 * delta;
+        //     cube.rotation.z += 1* delta;
+        //     renderer.render(scene, camera);
+        // };
+        //
+        //
+        //
+        //
+        // render();
+        //
+        //
+        //
+
+
+    </script>
+    <script src="js/obj/House1.js"></script>
+    <script src="js/skybox/Skybox.js"></script>
+
 </body>
 </html>
