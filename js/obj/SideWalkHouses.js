@@ -36,7 +36,7 @@ function LoadOuterSideWalk(x, y, z) {
     });
 
 
-    TextureLoader.load('images/SideWalk/Stoep.jpg', function (texture) {
+    TextureLoader.load('images/SideWalk/Curb.jpg', function (texture) {
         var outerRadius = 8.1;
         var innerRadius = 8;
         var height = 0.3;
