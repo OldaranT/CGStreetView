@@ -17,10 +17,23 @@
 </head>
 <body>
     <script src="three/three.js"></script>
-    <script src="js/controls/OrbitControls.js"></script>
     <script src="scene.js"></script>
-    <script src="js/obj/House1.js"></script>
+
+    <script src="js/controls/OrbitControls.js"></script>
+
     <script src="js/skybox/Skybox.js"></script>
+
+    <script src="js/loader/MTLLoader.js"></script>
+    <script src="js/loader/OBJLoader.js"></script>
+    <script src="js/loader/DDSLoader.js"></script>
+
+    <script src="js/obj/Fountain.js"></script>
+    <script src="js/obj/CourageDog.js"></script>
+    <script src="js/obj/House1.js"></script>
+    <script src="js/obj/Pillar.js"></script>
+    <script src="js/obj/Road.js"></script>
+    <script src="js/obj/SideWalkFountain.js"></script>
+    <script src="js/obj/SideWalkHouses.js"></script>
     <script>
 
         // Create camera
@@ -31,8 +44,8 @@
             11000); // far — Camera frustum far plane.
 
         //Create light
-        var light = new THREE.DirectionalLight(0xdddddd, 1000);
-        light.position.set(-1, 10, 1);
+        var light = new THREE.SpotLight();
+        light.position.set(40, 40, 40);
         scene.add(light);
 
         // Create renderer
@@ -54,7 +67,7 @@
 
 
 
-        camera.position.z = 3;
+        camera.position.set(0,5,10);
 //
         var loader = new THREE.TextureLoader();
         loader.setCrossOrigin("");
@@ -87,23 +100,22 @@
 
         var clock = new THREE.Clock();
 
-        var CarContainer = new THREE.Object3D();
+        var CourageDogContainer = new THREE.Object3D();
 
 
 
 
-        var Car = ReturnCar(7,1,0);
-
-        CarContainer.add(Car);
-        scene.add(CarContainer);
-        var TotaalDelta =0;
+        var CourageDog = CreateCourageDog(-8.5,1.45,0);
+        scene.add(CourageDog);
+        CourageDogContainer.add(CourageDog);
+        scene.add(CourageDogContainer);
+        var TotaalDelta = 0;
 
         // game logic
         var update = function () {
             TotaalDelta += clock.getDelta();
-            console.log(TotaalDelta);
            //CarContainer.position.set(TotaalDelta,1,TotaalDelta);
-            CarContainer.rotation.y = TotaalDelta;
+            CourageDogContainer.rotation.y = TotaalDelta;
         };
 
         //draw scene
@@ -125,6 +137,5 @@
 
 
     </script>
-
 </body>
 </html>
