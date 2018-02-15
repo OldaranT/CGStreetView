@@ -1,4 +1,3 @@
-
 var House2container = new THREE.Object3D();
 
 var x = 0;
@@ -12,7 +11,7 @@ var texture = new THREE.TextureLoader().load( 'images/House2/File_Red_brick_wall
 // Allows for floor to repeat itself (to prevent blurriness).
 texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 // Optimizing quality of texture.
-texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+//texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 // Texture repeating options, the floor is a 40x40 grid of tiles containing the texture.
 texture.repeat.set( 10, 10 );
 

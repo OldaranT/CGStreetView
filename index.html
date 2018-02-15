@@ -102,20 +102,15 @@
         var clock = new THREE.Clock();
 
         var CourageDogContainer = new THREE.Object3D();
-
-
-
-
         var CourageDog = CreateCourageDog(-8.5,1.45,0);
-        scene.add(CourageDog);
         CourageDogContainer.add(CourageDog);
         scene.add(CourageDogContainer);
+
         var TotaalDelta = 0;
 
         // game logic
         var update = function () {
             TotaalDelta += clock.getDelta();
-           //CarContainer.position.set(TotaalDelta,1,TotaalDelta);
             CourageDogContainer.rotation.y = TotaalDelta;
         };
 
