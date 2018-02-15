@@ -3,6 +3,7 @@ function CreateCourageDog(x,y,z){
 
     var CourageDog = new THREE.Object3D();
 
+    //Load object and mtl
     var mtlLoader = new THREE.MTLLoader();
     mtlLoader.setPath('js/obj/CourageDog/');
     mtlLoader.load('courage_apply.mtl', function(materials) {
@@ -30,7 +31,8 @@ function CreateCourageDog(x,y,z){
             }
         );
     });
-    console.log(CourageDog);
+
+    //Return imported CourageDog
     return CourageDog;
 
 }

@@ -1,19 +1,23 @@
 
 function LoadRoad(x, y, z) {
+
+    //Load texture
     TextureLoader.load('images/Road/TexturesCom_FloorsPortuguese0049_M.jpg', function (texture) {
+
+        //Road size.
         var outerRadius = 8;
         var innerRadius = 5.4;
         var height = 0.01;
 
 
-        // Allows for floor to repeat itself (to prevent blurriness).
+        // Allows for textures to repeat them self (to prevent blurriness).
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
         // Optimizing quality of texture.
         texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        // Texture repeating options, the floor is a 40x40 grid of tiles containing the texture.
+        // Texture repeating options.
         texture.repeat.set( 0.3, 0.3 );
-        // Makes it so that the floor is horizontal(default is vertical).
 
+        //Create shape of the road.
         var arcShape = new THREE.Shape();
         arcShape.moveTo(outerRadius * 2, outerRadius);
         arcShape.absarc(outerRadius, outerRadius, outerRadius, 0, Math.PI * 2, false);
@@ -30,8 +34,14 @@ function LoadRoad(x, y, z) {
         });
         RoadGeometry.center();
         RoadGeometry.rotateX(Math.PI * -.5);
+
+        //Create material for the road.
         var RoadMaterial = new THREE.MeshBasicMaterial({map: texture, side: THREE.DoubleSide});
+
+        //RoadMesh
         var RoadMesh = new THREE.Mesh(RoadGeometry,RoadMaterial);
+
+        //Position and add the road to the scene
         RoadMesh.position.set(x, y, z);
         scene.add(RoadMesh);
     });
