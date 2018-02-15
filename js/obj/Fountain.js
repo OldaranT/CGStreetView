@@ -1,4 +1,4 @@
-THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+fountain = new THREE.Object3D();
 
 var mtlLoader = new THREE.MTLLoader();
 mtlLoader.setPath('js/obj/Fountain/');
