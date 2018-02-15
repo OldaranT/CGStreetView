@@ -18,6 +18,9 @@
 <body>
     <script src="three/three.js"></script>
     <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/loader/MTLLoader.js"></script>
+    <script src="js/loader/OBJLoader.js"></script>
+    <script src="js/loader/DDSLoader.js"></script>
     <script>
         // Create scene
         var scene = new THREE.Scene();
@@ -30,8 +33,8 @@
             11000); // far — Camera frustum far plane.
 
         //Create light
-        var light = new THREE.DirectionalLight(0xdddddd, 1000);
-        light.position.set(-1, 10, 1);
+        var light = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.5);
+        light.position.set(0, 40, 0);
         scene.add(light);
 
         //Create Loader
@@ -159,6 +162,7 @@
     </script>
     <script src="js/obj/House1.js"></script>
     <script src="js/skybox/Skybox.js"></script>
+    <script src="js/obj/Fountain.js"></script>
 
 </body>
 </html>

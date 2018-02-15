@@ -1,0 +1,73 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 15.02.2018 10:37:33
+
+newmtl Material__1
+	Ns 60.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.17908 0.06536 0.06536
+	Kd 0.53725 0.19608 0.19608
+	Ks 0.45000 0.45000 0.45000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka maps\tile-wf01.jpg
+	map_Kd maps\tile-wf01.jpg
+
+newmtl water
+	Ns 10.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.58800 0.58800 0.58800
+	Kd 0.58800 0.58800 0.58800
+	Ks 0.00000 0.00000 0.00000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka maps\water.jpg
+	map_Kd maps\water.jpg
+	map_bump -bm 0.30000 maps\water.jpg
+
+newmtl Material__4
+	Ns 20.00000
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.03529 0.22353 0.21699
+	Kd 0.10588 0.67059 0.65098
+	Ks 0.36000 0.36000 0.36000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka maps\marble02.jpg
+	map_Kd maps\marble02.jpg
+
+newmtl Mghg
+	Ns 79.99999
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.17908 0.06536 0.06536
+	Kd 0.53725 0.19608 0.19608
+	Ks 0.63000 0.63000 0.63000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka maps\tile-wf01.jpg
+	map_Kd maps\tile-wf01.jpg
+
+newmtl cv
+	Ns 79.99999
+	Ni 1.50000
+	d 1.00000
+	Tr 0.00000
+	Tf 1.00000 1.00000 1.00000 
+	illum 2
+	Ka 0.17908 0.06536 0.06536
+	Kd 0.53725 0.19608 0.19608
+	Ks 0.63000 0.63000 0.63000
+	Ke 0.00000 0.00000 0.00000
+	map_Ka maps\marble04.jpg
+	map_Kd maps\marble04.jpg
