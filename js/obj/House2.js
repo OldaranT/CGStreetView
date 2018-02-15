@@ -23,7 +23,7 @@ function CreateHouse2( x, y, z)
     RoofTexture.repeat.set( 1, 1 );
 
 
-    // Make Matterials
+    // Make Materials
     var WallMaterial = new THREE.MeshBasicMaterial( { map: WallTexture});
     var WallMaterial2 = new THREE.MeshBasicMaterial( { map: WallTexture2});
     var RoofMaterial = new THREE.MeshBasicMaterial( { map: RoofTexture});
@@ -53,20 +53,10 @@ function CreateHouse2( x, y, z)
 
     Roof.position.set(0,height,-length/2);
 
-
-    // Make the extention at the front of the house
-    var extention = new THREE.Mesh(new THREE.BoxGeometry());
-
-
     // make the Garage
-
-
     var Garage = new THREE.Mesh(new THREE.BoxGeometry(width/3,height,length/2),[WallMaterial,WallMaterial,RoofMaterial,WallMaterial,WallMaterial,WallMaterial]);
 
     Garage.position.set( -width/3 - width/3,height/2,length /4);
-
-
-
 
     // adding to container
     House2container.add(Roof);

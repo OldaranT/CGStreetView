@@ -1,27 +1,36 @@
-fountain = new THREE.Object3D();
+function CreateFountain(){
+    var fountain = new THREE.Object3D();
 
-var mtlLoader = new THREE.MTLLoader();
-mtlLoader.setPath('js/obj/Fountain/');
-mtlLoader.load('Fountain.mtl', function(materials) {
-    materials.preload();
-    var objLoader = new THREE.OBJLoader();
-    objLoader.setMaterials(materials);
-    objLoader.load('js/obj/Fountain/Fountain.obj', function(object) {
-            fountain = object;
-            scene.add(fountain);
-            fountain.scale.set(0.2,0.2,0.2);
-            fountain.position.set(0,0.2,-5.8)
-        },     // called when loading is in progresses
-        function ( xhr ) {
+    //load materials for fountain
+    var mtlLoader = new THREE.MTLLoader();
+    mtlLoader.setPath('js/obj/Fountain/');
+    mtlLoader.load('Fountain.mtl', function(materials) {
+        materials.preload();
 
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        //load fountain object
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials(materials);
+        objLoader.load('js/obj/Fountain/Fountain.obj', function(object) {
+                fountain = object;
+                scene.add(fountain);
+                fountain.scale.set(0.2,0.2,0.2);
+                fountain.position.set(0,0.2,-5.8)
+            },     // called when loading is in progresses
+            function ( xhr ) {
 
-        },
-        // called when loading has errors
-        function ( error ) {
+                console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 
-            console.log( error );
+            },
+            // called when loading has errors
+            function ( error ) {
 
-        }
-    );
-});
+                console.log( error );
+
+            }
+        );
+    });
+
+    //return imported fountain object
+    return fountain;
+}
+

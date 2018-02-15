@@ -35,6 +35,7 @@
     <script src="js/obj/Road.js"></script>
     <script src="js/obj/SideWalkFountain.js"></script>
     <script src="js/obj/SideWalkHouses.js"></script>
+    <script src="js/light/Sun.js"></script>
     <script>
 
         // Create camera
@@ -44,10 +45,8 @@
             0.1, // near — Camera frustum near plane.
             11000); // far — Camera frustum far plane.
 
-        //Create light
-        var light = new THREE.SpotLight();
-        light.position.set(40, 40, 40);
-        scene.add(light);
+        camera.position.set(15,5,0);
+        camera.rotation.y = 1/2 * Math.PI;
 
         // Create renderer
         var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -66,24 +65,6 @@
         //Create controls.
         control = new THREE.OrbitControls( camera, renderer.domElement);
 
-
-
-        camera.position.set(15,5,0);
-        camera.rotation.y = 1/2 * Math.PI;
-
-//
-        var loader = new THREE.TextureLoader();
-        loader.setCrossOrigin("");
-        var texture1 = loader.load("https://threejs.org/examples/textures/crate.gif");
-        texture1.wrapS = texture1.wrapT = THREE.RepeatWrapping;
-        texture1.repeat.set(0.05, 0.05);
-        var texture2 = loader.load("https://threejs.org/examples/textures/hardwood2_diffuse.jpg");
-        texture2.wrapS = texture2.wrapT = THREE.RepeatWrapping;
-        texture2.repeat.set(0.1, 0.1);
-
-
-//
-
         // Loads the "floor" of the environment.
         TextureLoader.load('images/Floor/Grass.jpg', function ( texture ) {
             var geo = new THREE.PlaneBufferGeometry(2000, 2000, 8, 8);
@@ -101,14 +82,20 @@
             scene.add(floor);
         });
 
-        var clock = new THREE.Clock();
+        // Add Sun to scene
+        CreateSun();
 
+        // add walking dog
         var CourageDogContainer = new THREE.Object3D();
         var CourageDog = CreateCourageDog(-8.5,1.45,0);
         CourageDogContainer.add(CourageDog);
         scene.add(CourageDogContainer);
 
+        // add fountain
+        scene.add(CreateFountain());
+
         var TotaalDelta = 0;
+        var clock = new THREE.Clock();
 
         // game logic
         var update = function () {
@@ -129,10 +116,6 @@
         };
 
         Gameloop();
-
-
-
-
 
     </script>
 </body>
