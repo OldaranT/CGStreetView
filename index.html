@@ -18,9 +18,10 @@
 <body>
     <script src="three/three.js"></script>
     <script src="js/controls/OrbitControls.js"></script>
+    <script src="scene.js"></script>
+    <script src="js/obj/House1.js"></script>
+    <script src="js/skybox/Skybox.js"></script>
     <script>
-        // Create scene
-        var scene = new THREE.Scene();
 
         // Create camera
         var camera = new THREE.PerspectiveCamera(
@@ -33,9 +34,6 @@
         var light = new THREE.DirectionalLight(0xdddddd, 1000);
         light.position.set(-1, 10, 1);
         scene.add(light);
-
-        //Create Loader
-        var TextureLoader = new THREE.TextureLoader();
 
         // Create renderer
         var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -87,14 +85,30 @@
             scene.add(floor);
         });
 
+        var clock = new THREE.Clock();
+
+        var CarContainer = new THREE.Object3D();
+
+
+
+
+        var Car = ReturnCar(7,1,0);
+
+        CarContainer.add(Car);
+        scene.add(CarContainer);
+        var TotaalDelta =0;
+
         // game logic
         var update = function () {
-
+            TotaalDelta += clock.getDelta();
+            console.log(TotaalDelta);
+           //CarContainer.position.set(TotaalDelta,1,TotaalDelta);
+            CarContainer.rotation.y = TotaalDelta;
         };
 
         //draw scene
         var render = function () {
-          renderer.render(scene, camera);
+            renderer.render(scene, camera);
         };
 
         // run gameloop
@@ -110,55 +124,7 @@
 
 
 
-
-// old
-        // var geometry = new THREE.SphereGeometry(1, 32, 24);
-        // var normalMap = THREE.ImageUtils.loadTexture("images/textures/earth_normal.jpg");
-        // var colorMap = THREE.ImageUtils.loadTexture("images/textures/earth.jpg");
-        // var material = new THREE.MeshPhongMaterial(
-        //     {
-        //         map: colorMap,
-        //         normalMap: normalMap
-        //     }
-        // );
-        // var cube = new THREE.Mesh(geometry,material);
-        //
-        // Skybox
-
-        //
-        //
-        //
-        // // Move camera from center
-        // camera.position.x = 0; // move right from center of scene
-        // camera.position.y = 0; // move up from center of scene
-        // camera.position.z = 0; // move camera away from center of scene
-        //
-        // renderer.render(scene, camera);
-        //
-        // var clock = new THREE.Clock();
-        //
-        // var render = function () {
-        //     requestAnimationFrame(render);
-        //     var delta = clock.getDelta();
-        //
-        //     //cube.rotation.y += 1 * delta;
-        //     //cube.rotation.x +=  1 * delta;
-        //     cube.rotation.z += 1* delta;
-        //     renderer.render(scene, camera);
-        // };
-        //
-        //
-        //
-        //
-        // render();
-        //
-        //
-        //
-
-
     </script>
-    <script src="js/obj/House1.js"></script>
-    <script src="js/skybox/Skybox.js"></script>
 
 </body>
 </html>
